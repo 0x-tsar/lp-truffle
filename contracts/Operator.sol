@@ -1,36 +1,27 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-// import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+pragma solidity ^0.7.3;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "./LiquidityProvider.sol";
-import "./Dai.sol";
 
-contract Operator is Dai {
-    // LiquidityProvider public liquidityToken;
-    Dai public dai;
-    uint256 public FEE = 1_000; //10%
+contract Operator is ERC20 {
+    IERC20 public collateral;
+    uint256 price = 1;
 
-    constructor(address daiAddress) {
-        // liquidityToken = LiquidityProvider(lpAddress);
-        dai = Dai(daiAddress);
+    constructor(address _collateral) ERC20("Collateral Backed Token", "CBT") {
+        collateral = IERC20(_collateral);
     }
 
-    function deposit(uint256 amount) public {
-        //get approved first
-        dai.transferFrom(msg.sender, address(this), amount);
-        _mint(msg.sender, amount);
+    function deposit(uint256 collateralAmount) external {
+        collateral.transferFrom(msg.sender, address(this), collateralAmount);
+        _mint(msg.sender, collateralAmount * price);
     }
 
-    function withdraw(uint256 amount) public {
-        require(balanceOf(msg.sender) >= amount, "You don't have enough");
-        _burn(msg.sender, amount);
-        transfer(msg.sender, amount);
-    }
-
-    //1_000 basis points = 10 pct
-    function calculateFee(uint256 amount) public view returns (uint256) {
-        require((amount / 10000) * 10000 == amount, "too small");
-        return (amount * FEE) / 10000;
+    function withdraw(uint256 tokenAmount) external {
+        require(balanceOf(msg.sender) >= tokenAmount, "balance too low");
+        _burn(msg.sender, tokenAmount);
+        collateral.transfer(tokenAmount / price);
     }
 }
