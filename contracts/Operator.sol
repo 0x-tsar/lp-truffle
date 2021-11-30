@@ -6,9 +6,11 @@ import "./LiquidityProvider.sol";
 
 contract Operator is ERC20 {
     LiquidityProvider public liquidityToken;
+    uint256 public FEE = 1_000; //10%
 
     constructor(address lpAddress) ERC20("Operator Token", "OPT") {
         liquidityToken = LiquidityProvider(lpAddress);
+        _mint(msg.sender, 3 * 10**18);
     }
 
     function deposit(uint256 amount) public {
@@ -22,9 +24,9 @@ contract Operator is ERC20 {
         liquidityToken.transfer(msg.sender, amount);
     }
 
-    // //185 basis points = 1.85 pct
-    // function calculateFee(uint256 amount) public view returns (uint256) {
-    //     require((amount / 10000) * 10000 == amount, "too small");
-    //     return (amount * FEE) / 10000;
-    // }
+    //185 basis points = 1.85 pct
+    function calculateFee(uint256 amount) public view returns (uint256) {
+        require((amount / 10000) * 10000 == amount, "too small");
+        return (amount * FEE) / 10000;
+    }
 }
