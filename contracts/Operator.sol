@@ -7,12 +7,12 @@ import "./LiquidityProvider.sol";
 import "./Dai.sol";
 
 contract Operator {
-    LiquidityProvider public liquidityToken;
+    // LiquidityProvider public liquidityToken;
     IERC20 public dai;
     uint256 public FEE = 1_000; //10%
 
-    constructor(address lpAddress, address daiAddress) {
-        liquidityToken = LiquidityProvider(lpAddress);
+    constructor(address daiAddress) {
+        // liquidityToken = LiquidityProvider(lpAddress);
         dai = IERC20(daiAddress);
     }
 
