@@ -17,6 +17,11 @@ contract Operator {
         liquidityToken.mint(msg.sender, amount);
     }
 
+    function withdraw(uint256 amount) public {
+        liquidityToken.transfer(msg.sender, amount);
+        liquidityToken.burn(msg.sender, amount);
+    }
+
     //185 basis points = 1.85 pct
     function calculateFee(uint256 amount) external pure returns (uint256) {
         require((amount / 10000) * 10000 == amount, "too small");

@@ -11,6 +11,8 @@ module.exports = async () => {
     console.log(operator.methods);
     console.log(account);
 
+    const value = web3.utils.toWei("0.01");
+
     //
   } catch (error) {
     console.log(error);
