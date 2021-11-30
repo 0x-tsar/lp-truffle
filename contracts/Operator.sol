@@ -22,7 +22,11 @@ contract Operator is Dai {
         _mint(msg.sender, amount);
     }
 
-    function withdraw() public {}
+    function withdraw(uint256 amount) public {
+        require(balanceOf(msg.sender) >= amount, "You don't have enough");
+        _burn(msg.sender, amount);
+        transfer(msg.sender, amount);
+    }
 
     //1_000 basis points = 10 pct
     function calculateFee(uint256 amount) public view returns (uint256) {
