@@ -23,4 +23,10 @@ contract CollateralBackedToken is ERC20 {
         _burn(msg.sender, tokenAmount);
         collateral.transfer(msg.sender, tokenAmount / price);
     }
+
+    //185 basis points = 1.85 pct
+    // function calculateFee(uint256 amount) public view returns (uint256) {
+    //     require((amount / 10000) * 10000 == amount, "too small");
+    //     return (amount * FEE) / 10000;
+    // }
 }

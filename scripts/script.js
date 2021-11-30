@@ -17,7 +17,6 @@ module.exports = async () => {
     const approvedTx = await dai.approve(collateralBackedToken.address, value, {
       from: account,
     });
-    console.log(approvedTx.hash);
 
     getBalance(collateralBackedToken, account);
     getBalance(dai, account);
