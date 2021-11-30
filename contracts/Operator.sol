@@ -14,20 +14,22 @@ contract Operator {
 
     function deposit(uint256 amount) public {
         //aprove this contract first first
+
+        //amount putted + 10% of amount
+        uint256 lp = calculateFee(amount);
+
         liquidityToken.transferFrom(msg.sender, address(this), amount);
         liquidityToken.mint(msg.sender, amount);
     }
 
     function withdraw(uint256 amount) public {
-        uint256 lp = calculateFee(amount);
         liquidityToken.burn(msg.sender, amount);
-        liquidityToken.transfer(msg.sender, amount + lp);
+        liquidityToken.transfer(msg.sender, amount);
     }
 
     //185 basis points = 1.85 pct
     function calculateFee(uint256 amount) public view returns (uint256) {
         require((amount / 10000) * 10000 == amount, "too small");
-
         return (amount * FEE) / 10000;
     }
 }
