@@ -13,7 +13,8 @@ module.exports = async () => {
 
     const value = web3.utils.toWei("0.01");
 
-    // await
+    let balance = await operator.methods.balanceOf(account);
+    console.log(balance.toString());
 
     //
   } catch (error) {
