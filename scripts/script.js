@@ -19,17 +19,17 @@ module.exports = async () => {
     });
     console.log(approvedTx);
 
-    await collateralBackedToken.deposit(value);
+    await collateralBackedToken.deposit(value, { from: account });
+
+    console.log(`deposited`);
 
     console.log(`collateral backed token balance`);
     getBalance(collateralBackedToken, account);
 
-    await collateralBackedToken.withdraw(value);
+    await collateralBackedToken.withdraw(value, { from: account });
 
     console.log(`collateral backed token balance after withdraw`);
     getBalance(collateralBackedToken, account);
-
-    // getBalance(operator, account);
 
     //
   } catch (error) {
