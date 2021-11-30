@@ -14,12 +14,10 @@ contract Operator {
 
     function deposit(uint256 amount) public {
         //aprove this contract first first
-
+        liquidityToken.transferFrom(msg.sender, address(this), amount);
         //amount putted + 10% of amount
         uint256 lp = calculateFee(amount);
-
-        liquidityToken.transferFrom(msg.sender, address(this), amount);
-        liquidityToken.mint(msg.sender, amount);
+        liquidityToken.mint(msg.sender, amount + lp);
     }
 
     function withdraw(uint256 amount) public {
