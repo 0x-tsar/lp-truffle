@@ -1,15 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+// import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./LiquidityProvider.sol";
+import "./Dai.sol";
 
-contract Operator is ERC20 {
+contract Operator {
     LiquidityProvider public liquidityToken;
+    IERC20 public dai;
     uint256 public FEE = 1_000; //10%
 
-    constructor(address lpAddress) ERC20("Operator Token", "OPT") {
+    constructor(address lpAddress, address daiAddress) {
         liquidityToken = LiquidityProvider(lpAddress);
+        dai = IERC20(daiAddress);
     }
 
     function deposit(uint256 amount) public {}
