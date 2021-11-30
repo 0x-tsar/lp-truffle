@@ -10,7 +10,14 @@ contract Operator {
         liquidityToken = IERC20(lpAddress);
     }
 
-    function name(type name) {
-      
+    function deposit(uint256 amount) {
+        //aprove this contract first first
+    }
+
+    //185 basis points = 1.85 pct
+    function calculateFee(uint256 amount) external pure returns (uint256) {
+        require((amount / 10000) * 10000 == amount, "too small");
+
+        return (amount * 185) / 10000;
     }
 }
