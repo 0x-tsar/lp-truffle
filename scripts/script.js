@@ -6,6 +6,11 @@ module.exports = async () => {
     const liquidityProvider = await LiquidityProvider.deployed();
     const operator = await Operator.deployed();
 
+    const [account, _] = await web3.eth.getAccounts();
+
+    console.log(operator.methods);
+    console.log(account);
+
     //
   } catch (error) {
     console.log(error);
