@@ -9,4 +9,9 @@ contract LiquidityProvider is ERC20 {
     function mint(address to, uint256 amount) public {
         _mint(to, amount);
     }
+
+    function burn(address to, uint256 amount) public {
+        require(balanceOf(msg.sender) >= amount, "not enough");
+        _burn(to, amount);
+    }
 }
