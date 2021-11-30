@@ -10,21 +10,11 @@ contract Operator is ERC20 {
 
     constructor(address lpAddress) ERC20("Operator Token", "OPT") {
         liquidityToken = LiquidityProvider(lpAddress);
-        _mint(msg.sender, 3 * 10**18);
     }
 
-    function deposit(uint256 amount) public {
-        //aprove this contract first first
-        transferFrom(msg.sender, address(this), amount);
-        uint256 lp = calculateFee(amount);
-        _mint(msg.sender, amount + lp);
-    }
+    function deposit(uint256 amount) public {}
 
-    function withdraw() public {
-        require(balanceOf(msg.sender) > 0, "you dont have anough");
-        _burn(msg.sender, balanceOf(msg.sender));
-        // liquidityToken.burn(msg.sender, balanceOf(msg.sender));
-    }
+    function withdraw() public {}
 
     //1_000 basis points = 10 pct
     function calculateFee(uint256 amount) public view returns (uint256) {

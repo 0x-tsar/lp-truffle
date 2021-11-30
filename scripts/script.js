@@ -26,12 +26,12 @@ module.exports = async () => {
     // const tx = await operator.deposit(value);
     // console.log(tx);
 
-    getBalance(operator, account);
+    // getBalance(operator, account);
 
-    const tx = await operator.withdraw();
-    console.log(tx);
+    // const tx = await operator.withdraw();
+    // console.log(tx);
 
-    getBalance(operator, account);
+    // getBalance(operator, account);
 
     //
   } catch (error) {
