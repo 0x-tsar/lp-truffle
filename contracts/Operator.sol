@@ -6,17 +6,21 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./LiquidityProvider.sol";
 import "./Dai.sol";
 
-contract Operator {
+contract Operator is Dai {
     // LiquidityProvider public liquidityToken;
-    IERC20 public dai;
+    Dai public dai;
     uint256 public FEE = 1_000; //10%
 
     constructor(address daiAddress) {
         // liquidityToken = LiquidityProvider(lpAddress);
-        dai = IERC20(daiAddress);
+        dai = Dai(daiAddress);
     }
 
-    function deposit(uint256 amount) public {}
+    function deposit(uint256 amount) public {
+        //get approved first
+        dai.transferFrom(msg.sender, address(this), amount);
+        _mint(msg.sender, amount);
+    }
 
     function withdraw() public {}
 
