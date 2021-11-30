@@ -14,18 +14,20 @@ module.exports = async () => {
 
     const value = web3.utils.toWei("0.01");
 
-    // const approvedTx = await operator.approve(operator.address, value, {
-    //   from: account,
-    // });
-    // console.log(approvedTx);
+    const approvedTx = await collateralBackedToken.approve(dai.address, value, {
+      from: account,
+    });
+    console.log(approvedTx);
 
-    // const tx = await operator.deposit(value);
-    // console.log(tx);
+    await collateralBackedToken.deposit(value);
 
-    // getBalance(operator, account);
+    console.log(`collateral backed token balance`);
+    getBalance(collateralBackedToken, account);
 
-    // const tx = await operator.withdraw();
-    // console.log(tx);
+    await collateralBackedToken.withdraw(value);
+
+    console.log(`collateral backed token balance after withdraw`);
+    getBalance(collateralBackedToken, account);
 
     // getBalance(operator, account);
 
