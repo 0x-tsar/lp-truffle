@@ -6,6 +6,7 @@ import "./LiquidityProvider.sol";
 
 contract Operator {
     LiquidityProvider public liquidityToken;
+    uint256 public FEE = 1_000; //10%
 
     constructor(address lpAddress) {
         liquidityToken = LiquidityProvider(lpAddress);
@@ -18,14 +19,14 @@ contract Operator {
     }
 
     function withdraw(uint256 amount) public {
-        liquidityToken.transfer(msg.sender, amount);
         liquidityToken.burn(msg.sender, amount);
+        liquidityToken.transfer(msg.sender, amount);
     }
 
     //185 basis points = 1.85 pct
-    function calculateFee(uint256 amount) external pure returns (uint256) {
+    function calculateFee(uint256 amount) external view returns (uint256) {
         require((amount / 10000) * 10000 == amount, "too small");
 
-        return (amount * 185) / 10000;
+        return (amount * FEE) / 10000;
     }
 }
