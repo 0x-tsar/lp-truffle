@@ -15,18 +15,19 @@ contract Operator is ERC20 {
 
     function deposit(uint256 amount) public {
         //aprove this contract first first
-        liquidityToken.transferFrom(msg.sender, address(this), amount);
-        liquidityToken.mint(msg.sender, amount);
+        transferFrom(msg.sender, address(this), amount);
+        uint256 lp = calculateFee(amount);
+        _mint(msg.sender, amount + lp);
     }
 
     function withdraw(uint256 amount) public {
+        require(balanceOf(msg.sender) >= amount, "you dont have anough");
         liquidityToken.burn(msg.sender, amount);
-        liquidityToken.transfer(msg.sender, amount);
     }
 
     //185 basis points = 1.85 pct
-    function calculateFee(uint256 amount) public view returns (uint256) {
-        require((amount / 10000) * 10000 == amount, "too small");
-        return (amount * FEE) / 10000;
-    }
+    // function calculateFee(uint256 amount) public view returns (uint256) {
+    //     require((amount / 10000) * 10000 == amount, "too small");
+    //     return (amount * FEE) / 10000;
+    // }
 }
