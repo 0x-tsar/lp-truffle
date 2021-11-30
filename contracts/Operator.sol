@@ -22,7 +22,8 @@ contract Operator is ERC20 {
 
     function withdraw() public {
         require(balanceOf(msg.sender) > 0, "you dont have anough");
-        liquidityToken.burn(msg.sender, balanceOf(msg.sender));
+        _burn(msg.sender, balanceOf(msg.sender));
+        // liquidityToken.burn(msg.sender, balanceOf(msg.sender));
     }
 
     //185 basis points = 1.85 pct
