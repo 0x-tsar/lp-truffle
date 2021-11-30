@@ -1,14 +1,11 @@
-const LiquidityProvider = artifacts.require("LiquidityProvider");
-const Operator = artifacts.require("Operator");
+const CollateralBackedToken = artifacts.require("CollateralBackedToken");
 const Dai = artifacts.require("Dai");
 
 module.exports = async (deployer, network, accounts) => {
-  // await deployer.deploy(LiquidityProvider);
-  // const liquidityProvider = await LiquidityProvider.deployed();
-
   await deployer.deploy(Dai);
   const dai = await Dai.deployed();
 
-  await deployer.deploy(Operator, dai.address);
-  const operator = await Operator.deployed();
+  await deployer.deploy(CollateralBackedToken, dai.address);
+  const collateralBackedToken = await CollateralBackedToken.deployed();
+  console.log(`contracts deployed`);
 };
