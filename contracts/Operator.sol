@@ -26,7 +26,7 @@ contract Operator is ERC20 {
         // liquidityToken.burn(msg.sender, balanceOf(msg.sender));
     }
 
-    //185 basis points = 1.85 pct
+    //1_000 basis points = 10 pct
     function calculateFee(uint256 amount) public view returns (uint256) {
         require((amount / 10000) * 10000 == amount, "too small");
         return (amount * FEE) / 10000;
