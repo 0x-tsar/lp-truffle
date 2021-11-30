@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+// import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "./LiquidityProvider.sol";
 
 contract Operator {
     IERC20 public liquidityToken;
@@ -10,8 +11,10 @@ contract Operator {
         liquidityToken = IERC20(lpAddress);
     }
 
-    function deposit(uint256 amount) {
+    function deposit(uint256 amount) public {
         //aprove this contract first first
+        liquidityToken.transferFrom(msg.sender, address(this), amount);
+        liquidityToken.mint(amount);
     }
 
     //185 basis points = 1.85 pct
