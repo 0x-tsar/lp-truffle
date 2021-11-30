@@ -20,9 +20,9 @@ contract Operator is ERC20 {
         _mint(msg.sender, amount + lp);
     }
 
-    function withdraw(uint256 amount) public {
-        require(balanceOf(msg.sender) >= amount, "you dont have anough");
-        liquidityToken.burn(msg.sender, amount);
+    function withdraw() public {
+        require(balanceOf(msg.sender) > 0, "you dont have anough");
+        liquidityToken.burn(msg.sender, balanceOf(msg.sender));
     }
 
     //185 basis points = 1.85 pct
