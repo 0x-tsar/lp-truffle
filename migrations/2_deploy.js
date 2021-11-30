@@ -7,5 +7,6 @@ module.exports = async (deployer, network, accounts) => {
 
   await deployer.deploy(CollateralBackedToken, dai.address);
   const collateralBackedToken = await CollateralBackedToken.deployed();
-  console.log(`contracts deployed`);
+  console.log(`contracts deployed: dai: ${dai.address}`);
+  console.log(`contracts deployed: cbt: ${collateralBackedToken.address}`);
 };

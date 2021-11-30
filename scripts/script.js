@@ -1,20 +1,16 @@
-const LiquidityProvider = artifacts.require("LiquidityProvider");
-const Operator = artifacts.require("Operator");
+const Dai = artifacts.require("Dai");
+const CollateralBackedToken = artifacts.require("CollateralBackedToken");
 
-const getBalance = async (op, acc) => {
-  let balance = await op.balanceOf(acc);
+const getBalance = async (con, acc) => {
+  let balance = await con.balanceOf(acc);
   console.log(balance.toString());
 };
 
 module.exports = async () => {
   try {
-    const liquidityProvider = await LiquidityProvider.deployed();
-    const operator = await Operator.deployed();
-
     const [account, _] = await web3.eth.getAccounts();
-
-    // console.log(operator.methods);
-    // console.log(account);
+    const dai = await Dai.deployed();
+    const collateralBackedToken = await CollateralBackedToken.deployed();
 
     const value = web3.utils.toWei("0.01");
 
