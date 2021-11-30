@@ -26,8 +26,8 @@ contract Operator is ERC20 {
     }
 
     //185 basis points = 1.85 pct
-    // function calculateFee(uint256 amount) public view returns (uint256) {
-    //     require((amount / 10000) * 10000 == amount, "too small");
-    //     return (amount * FEE) / 10000;
-    // }
+    function calculateFee(uint256 amount) public view returns (uint256) {
+        require((amount / 10000) * 10000 == amount, "too small");
+        return (amount * FEE) / 10000;
+    }
 }
