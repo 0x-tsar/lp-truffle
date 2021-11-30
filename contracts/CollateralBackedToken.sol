@@ -13,6 +13,7 @@ contract CollateralBackedToken is ERC20 {
     }
 
     function deposit(uint256 collateralAmount) external {
+        //approve first
         collateral.transferFrom(msg.sender, address(this), collateralAmount);
         _mint(msg.sender, collateralAmount * price);
     }

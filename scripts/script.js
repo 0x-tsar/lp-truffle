@@ -14,10 +14,13 @@ module.exports = async () => {
 
     const value = web3.utils.toWei("0.01");
 
-    const approvedTx = await collateralBackedToken.approve(dai.address, value, {
+    const approvedTx = await dai.approve(collateralBackedToken.address, value, {
       from: account,
     });
-    console.log(approvedTx);
+    console.log(approvedTx.hash);
+
+    getBalance(collateralBackedToken, account);
+    getBalance(dai, account);
 
     await collateralBackedToken.deposit(value, { from: account });
 
