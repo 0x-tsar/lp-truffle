@@ -1,15 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-
-// import "./LiquidityProvider.sol";
+// import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "./LiquidityProvider.sol";
 
 contract Operator {
-    IERC20 public liquidityToken;
+    LiquidityProvider public liquidityToken;
 
     constructor(address lpAddress) {
-        liquidityToken = IERC20(lpAddress);
+        liquidityToken = LiquidityProvider(lpAddress);
     }
 
     function deposit(uint256 amount) public {
