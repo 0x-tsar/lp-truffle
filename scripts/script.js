@@ -8,8 +8,8 @@ module.exports = async () => {
 
     const [account, _] = await web3.eth.getAccounts();
 
-    console.log(operator.methods);
-    console.log(account);
+    // console.log(operator.methods);
+    // console.log(account);
 
     const value = web3.utils.toWei("0.01");
 
